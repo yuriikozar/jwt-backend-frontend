@@ -5,7 +5,6 @@ import com.example.scmessage.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -67,6 +66,7 @@ public class UserController {
     @GetMapping
     @ApiOperation("Get all users")
     public List<User> getAllUsers() {
+        System.out.println("USERSSSSSS");
         return userService.getAllUsers();
     }
 }
