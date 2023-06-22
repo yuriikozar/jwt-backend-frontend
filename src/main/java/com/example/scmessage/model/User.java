@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "username"),
+    @UniqueConstraint(columnNames = "email")
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,9 +41,5 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // Additional user properties
-
-    // Getters and setters
-
-    // You can add more fields based on your requirements
+    private String role;
 }

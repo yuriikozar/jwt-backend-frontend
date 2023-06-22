@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import * as UserApi from '../../api/UserApi';
+import { useAuth } from '../context/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -27,6 +28,7 @@ const Users = () => {
     const classes = useStyles();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
+    const Auth = useAuth();
 
     useEffect(() => {
         fetchUsers();
@@ -34,7 +36,8 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await UserApi.getUsers();
+            const user = Auth?.getUser(); // Get the current user from Auth context
+            const response = await UserApi.getUsers(user); // Pass the user to the getUsers() function
             setUsers(response);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -91,7 +94,7 @@ const Users = () => {
                                 <Button
                                     variant="contained"
                                     color="secondary"
-                                    onClick={() => UserApi.deleteUser(user.id)}
+                                    onClick={() => UserApi.deleteUser(user.id).catch((orr) => console.log(orr))}
                                 >
                                     Delete
                                 </Button>

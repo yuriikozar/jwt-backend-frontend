@@ -23,7 +23,19 @@ public class UserService {
     return userOptional.orElse(null);
   }
 
-  public User createUser(User user) {
+  public Optional<User> getByUsername(String username) {
+    return userRepository.findUserByUsername(username);
+  }
+
+  public Boolean hasUserWithUsername(String username) {
+    return userRepository.existsByUsername(username);
+  }
+
+  public Boolean hasUserWithEmail(String email) {
+    return userRepository.existsByEmail(email);
+  }
+
+  public User save(User user) {
     return userRepository.save(user);
   }
 

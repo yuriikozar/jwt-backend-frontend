@@ -1,8 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import Users from "./components/users/Users";
 import Navbar from "./components/navbar/Navbar";
 import CreateUser from "./components/create-user/CreateUser";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
 
 const App = () => {
     return (
@@ -11,6 +13,9 @@ const App = () => {
             <Routes>
                 <Route path="/users" element={<Users />} />
                 <Route path="/users/create-user" element={<CreateUser />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path="*" element={<Navigate to="/" />}/>
             </Routes>
         </Router>
     );

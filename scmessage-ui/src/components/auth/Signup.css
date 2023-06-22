@@ -1,0 +1,23 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-content {
+    margin-top: 100px; /* Adjust the margin-top value to position the content lower */
+}
+
+.signup-input {
+    margin-bottom: 10px;
+}
+
+.signup-button {
+    margin-top: 20px;
+}
+
+.signup-link {
+    color: violet;
+    text-decoration: none;
+}

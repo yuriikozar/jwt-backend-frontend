@@ -41,7 +41,7 @@ public class UserController {
     @PostMapping
     @ApiOperation("Create a new user")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+        User createdUser = userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
@@ -66,7 +66,6 @@ public class UserController {
     @GetMapping
     @ApiOperation("Get all users")
     public List<User> getAllUsers() {
-        System.out.println("USERSSSSSS");
         return userService.getAllUsers();
     }
 }
