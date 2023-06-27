@@ -20,14 +20,13 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   application:
-    name: "Secure And Safe"
+    name: "Secure jwt auth"
 server:
   port: 8081
 
 app:
   jwt:
-    # Signing key for HS512 algorithm
-    # In http://www.allkeysgenerator.com/ you can generate all kinds of keys
+    # HS512 algorithm
     secret: v9y$B&E)H@MbQeThWmZq4t7w!z%C*F-JaNdRfUjXn2r5u8x/A?D(G+KbPeShVkYp
     expiration:
       minutes: 2

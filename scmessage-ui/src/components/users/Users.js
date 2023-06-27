@@ -7,20 +7,43 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import * as UserApi from '../../api/UserApi';
 import { useAuth } from '../context/AuthContext';
+import * as UserApi from '../../api/UserApi';
 
 const useStyles = makeStyles((theme) => ({
-    table: {
-        marginLeft: theme.spacing(4),
-        marginBottom: theme.spacing(4),
+    container: {
+        margin: '40px auto',
+        maxWidth: 'calc(100% - 4cm)', // Adjusted maxWidth
+        padding: '0 2cm', // Adjusted padding
+        backgroundColor: '#f5f5f5',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    },
+    header: {
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginBottom: '16px',
     },
     createButton: {
-        marginBottom: theme.spacing(2),
+        marginBottom: '16px',
+    },
+    table: {
+        marginBottom: '16px',
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        width: '100%', // Make the table wider
     },
     editButton: {
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(2),
+        marginLeft: '16px',
+        marginRight: '8px',
+    },
+    deleteButton: {
+        marginRight: '8px',
+    },
+    wrapText: {
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-word',
     },
 }));
 
@@ -36,8 +59,8 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
-            const user = Auth?.getUser(); // Get the current user from Auth context
-            const response = await UserApi.getUsers(user); // Pass the user to the getUsers() function
+            const user = Auth?.getUser();
+            const response = await UserApi.getUsers(user);
             setUsers(response);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -53,16 +76,18 @@ const Users = () => {
     };
 
     return (
-        <div className={'users-all'}>
-            <h1>Users</h1>
-            <Button
-                variant="contained"
-                color="primary"
-                className={classes.createButton}
-                onClick={handleCreateUser}
-            >
-                Create New User
-            </Button>
+        <div className={classes.container}>
+            <div className={classes.headerContainer}>
+                <h1 className={classes.header}>Users</h1>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.createButton}
+                    onClick={handleCreateUser}
+                >
+                    Create New User
+                </Button>
+            </div>
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
@@ -83,18 +108,22 @@ const Users = () => {
                             <TableCell>{user.name}</TableCell>
                             <TableCell>{user.email}</TableCell>
                             <TableCell>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.editButton}
-                                    onClick={() => handleEditUser(user)}
-                                >
-                                    Edit
-                                </Button>
+                                {/* Edit Button */}
+                                {/* <Button
+          variant="contained"
+          color="primary"
+          className={classes.editButton}
+          onClick={() => handleEditUser(user)}
+        >
+          Edit
+        </Button> */}
+
+                                {/* Delete Button */}
                                 <Button
                                     variant="contained"
                                     color="secondary"
-                                    onClick={() => UserApi.deleteUser(user.id).catch((orr) => console.log(orr))}
+                                    className={classes.deleteButton}
+                                    onClick={() => UserApi.deleteUser(user.id).catch((error) => console.log(error))}
                                 >
                                     Delete
                                 </Button>
